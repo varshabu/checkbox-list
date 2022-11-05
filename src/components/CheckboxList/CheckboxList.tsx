@@ -14,7 +14,6 @@ export type Item = {
 export type ListProps = {
   item: Item;
   items: Item[];
-  isCollapsed: boolean;
   nodeItems: Item[];
   onClick?: (id: string) => void;
   checkboxState: CheckboxState;
@@ -24,7 +23,6 @@ export type ListProps = {
 
 type CheckboxListProps = {
   items: Item[];
-  isCollapsed?: boolean;
   idsToRender?: string[];
   indentLevel?: number;
   onClick?: (id: string) => void;
@@ -33,7 +31,6 @@ type CheckboxListProps = {
 
 const CheckboxList: React.FC<CheckboxListProps> = ({
   items,
-  isCollapsed = false,
   getStateForId,
   idsToRender = [],
   indentLevel = 0,
@@ -57,7 +54,6 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
         return (
           <ListItem
             key={item.id}
-            isCollapsed={isCollapsed}
             items={items}
             item={item}
             nodeItems={nodeItems}
@@ -75,14 +71,13 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
 const ListItem = ({
   item,
   nodeItems,
-  isCollapsed,
   onClick = () => {},
   checkboxState,
   items,
   indentLevel = 0,
   getStateForId,
 }: ListProps) => {
-  const [expand, setExpand] = useState(isCollapsed);
+  const [expand, setExpand] = useState(true);
 
   const getChildNodes = (parentId: string) => {
     const nodeItems = items.filter((i) => i.parentId === parentId);

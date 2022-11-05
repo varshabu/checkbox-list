@@ -1,0 +1,67 @@
+[
+  {
+    "id": "0-0",
+    "name": "Sports",
+    "parentId": null
+  },
+  {
+    "id": "0-1",
+    "name": "Soccer",
+    "parentId": null
+  },
+  {
+    "id": "0-2",
+    "name": "Rugby",
+    "parentId": null
+  },
+  {
+    "id": "0-0-0",
+    "name": "IPL",
+    "parentId": "0-0"
+  },
+  {
+    "id": "0-0-1",
+    "name": "EPL",
+    "parentId": "0-0"
+  },
+  {
+    "id": "0-0-0-0",
+    "name": "Mumbai Indians",
+    "parentId": "0-0-0"
+  },
+  {
+    "id": "0-0-0-1",
+    "name": "Rajastan Royals",
+    "parentId": "0-0-0"
+  },
+  {
+    "id": "0-0-0-2",
+    "name": "Gujrat Titans",
+    "parentId": "0-0-0"
+  },
+  {
+    "id": "0-0-1-0",
+    "name": "Arsenal",
+    "parentId": "0-0-1"
+  },
+  {
+    "id": "0-0-1-1",
+    "name": "Chelsea",
+    "parentId": "0-0-1"
+  },
+  {
+    "id": "0-0-1-2",
+    "name": "Manchester United",
+    "parentId": "0-0-1"
+  },
+  {
+    "id": "0-0-2",
+    "name": "NBA",
+    "parentId": "0-0"
+  },
+  {
+    "id": "0-0-0-0-0",
+    "name": "Rohit Sharma",
+    "parentId": "0-0-0-0"
+  }
+]

@@ -1,0 +1,51 @@
+.checkbox {
+  $color: #2b78d7;
+  $size: 18px;
+  $fontSize: 14px;
+  $bulletSize: 10px;
+  width: $size;
+  height: $size;
+  display: inline-block;
+  background: #ffffff;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: $fontSize;
+  position: relative;
+  border: 1px solid #cad1d5;
+  border-radius: 4px;
+  line-height: $fontSize;
+  margin-right: 10px;
+
+  &::after {
+    content: '\a0';
+  }
+
+  &.isChecked {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: $bulletSize;
+      width: $bulletSize;
+      background-color: #41c3a9;
+      border-radius: 50%;
+    }
+  }
+
+  &.isIndeterminate {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: $bulletSize;
+      width: $bulletSize;
+      background-color: orange;
+      border-radius: 50%;
+    }
+  }
+}

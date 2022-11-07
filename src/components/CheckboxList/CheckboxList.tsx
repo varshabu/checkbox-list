@@ -5,16 +5,16 @@ import Icon from '../Icon/Icon';
 import { CheckboxState } from '../Tree/Tree';
 import styles from './CheckboxList.module.scss';
 
-export type Item = {
+export type CheckboxItem = {
   id: string;
   name: string;
   parentId: string | null;
 };
 
 export type ListProps = {
-  item: Item;
-  items: Item[];
-  nodeItems: Item[];
+  item: CheckboxItem;
+  items: CheckboxItem[];
+  nodeItems: CheckboxItem[];
   onClick?: (id: string) => void;
   checkboxState: CheckboxState;
   getStateForId: (id: string) => CheckboxState;
@@ -22,7 +22,7 @@ export type ListProps = {
 };
 
 type CheckboxListProps = {
-  items: Item[];
+  items: CheckboxItem[];
   idsToRender?: string[];
   indentLevel?: number;
   onClick?: (id: string) => void;

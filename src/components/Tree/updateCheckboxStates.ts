@@ -1,21 +1,26 @@
-import { Item } from '../CheckboxList/CheckboxList';
-import { CheckboxState, ItemState } from './Tree';
+import { CheckboxItem } from '../CheckboxList/CheckboxList';
+import { CheckboxState, CheckboxItemState } from './Tree';
 
-export const updateItemStates = (oldState: ItemState[], items: Item[], clickedId: string) => {
+export const updateCheckboxStates = (
+  oldState: CheckboxItemState[],
+  items: CheckboxItem[],
+  clickedId: string
+) => {
   const newState = oldState.map((i) => ({ ...i }));
 
-  // getters
   const getItemState = (id: string) => {
     return newState.filter((i) => i.id === id)[0].state;
   };
 
-  // setters
   const updateParent = (id: string) => {
     const item = items.filter((i) => i.id === id)[0];
     const parent = items.filter((i) => i.id === item.parentId)[0];
+
     if (!parent) return;
+
     const childIds = items.filter((i) => i.parentId === parent.id).map((i) => i.id);
     const childStates = childIds.map((childId) => getItemState(childId));
+
     if (childStates.length === childStates.filter((s) => s === CheckboxState.CHECKED).length) {
       newState.filter((i) => i.id === parent.id)[0].state = CheckboxState.CHECKED;
     } else if (
@@ -46,7 +51,6 @@ export const updateItemStates = (oldState: ItemState[], items: Item[], clickedId
     updateParent(id);
   };
 
-  // actual logic
   const itemState = getItemState(clickedId);
   if (itemState === CheckboxState.CHECKED) {
     setUnchecked(clickedId);

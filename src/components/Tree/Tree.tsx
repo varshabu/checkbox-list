@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import items from '../../data/items.json';
 import CheckboxList from '../CheckboxList/CheckboxList';
-import { updateItemStates } from './updateItemStates';
+import { updateCheckboxStates } from './updateCheckboxStates';
 
 export enum CheckboxState {
   UNCHECKED,
@@ -9,31 +9,33 @@ export enum CheckboxState {
   INDETERMINATE,
 }
 
-export type ItemState = {
+export type CheckboxItemState = {
   id: string;
   state: CheckboxState;
 };
 
-const defaultItemStates: ItemState[] = items.map((i) => ({
+const defaultCheckboxStates: CheckboxItemState[] = items.map((i) => ({
   id: i.id,
   state: CheckboxState.UNCHECKED,
 }));
 
 const Tree = () => {
-  const [itemStates, setItemStates] = useState<ItemState[]>(defaultItemStates);
+  const [checkboxStates, setCheckboxStates] = useState<CheckboxItemState[]>(defaultCheckboxStates);
+
   const getStateForId = useCallback(
     (id: string) => {
-      return itemStates.filter((i) => i.id === id)[0].state;
+      return checkboxStates.filter((i) => i.id === id)[0].state;
     },
-    [itemStates]
+    [checkboxStates]
   );
-  const clickHandler = useCallback(
+
+  const handleClick = useCallback(
     (id: string) => {
-      setItemStates(updateItemStates(itemStates, items, id));
+      setCheckboxStates(updateCheckboxStates(checkboxStates, items, id));
     },
-    [itemStates]
+    [checkboxStates]
   );
-  return <CheckboxList items={items} onClick={clickHandler} getStateForId={getStateForId} />;
+  return <CheckboxList items={items} onClick={handleClick} getStateForId={getStateForId} />;
 };
 
 export default Tree;

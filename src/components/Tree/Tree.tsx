@@ -22,7 +22,7 @@ const defaultCheckboxStates: CheckboxItemState[] = items.map((i) => ({
 const Tree = () => {
   const [checkboxStates, setCheckboxStates] = useState<CheckboxItemState[]>(defaultCheckboxStates);
 
-  const getStateForId = useCallback(
+  const getIdState = useCallback(
     (id: string) => {
       return checkboxStates.filter((i) => i.id === id)[0].state;
     },
@@ -35,7 +35,14 @@ const Tree = () => {
     },
     [checkboxStates]
   );
-  return <CheckboxList items={items} onClick={handleClick} getStateForId={getStateForId} />;
+  return (
+    <CheckboxList
+      items={items}
+      onClick={handleClick}
+      getIdState={getIdState}
+      showInderminateState
+    />
+  );
 };
 
 export default Tree;

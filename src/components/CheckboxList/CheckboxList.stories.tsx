@@ -19,7 +19,7 @@ const defaultItemStates: CheckboxItemState[] = items.map((i) => ({
 
 const Template: ComponentStory<typeof CheckboxList> = () => {
   const [itemStates, setItemStates] = useState<CheckboxItemState[]>(defaultItemStates);
-  const getStateForId = useCallback(
+  const getIdState = useCallback(
     (id: string) => {
       return itemStates.filter((i) => i.id === id)[0].state;
     },
@@ -31,16 +31,7 @@ const Template: ComponentStory<typeof CheckboxList> = () => {
     },
     [itemStates]
   );
-  return <CheckboxList items={items} onClick={clickHandler} getStateForId={getStateForId} />;
+  return <CheckboxList items={items} onClick={clickHandler} getIdState={getIdState} />;
 };
 
 export const Default = Template.bind({});
-Default.parameters = {
-  docs: {
-    source: {
-      code: 'Your code snippet goes here.',
-      language: 'javascript',
-      type: 'auto',
-    },
-  },
-};

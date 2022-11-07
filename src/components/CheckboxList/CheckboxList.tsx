@@ -14,30 +14,45 @@ export type CheckboxItem = {
 export type ListProps = {
   item: CheckboxItem;
   items: CheckboxItem[];
+  showInderminateState: boolean;
   nodeItems: CheckboxItem[];
   onClick?: (id: string) => void;
   checkboxState: CheckboxState;
-  getStateForId: (id: string) => CheckboxState;
+  getIdState: (id: string) => CheckboxState;
   indentLevel?: number;
 };
 
 type CheckboxListProps = {
+  /**
+   * Array of checkboxes to be rendered
+   */
   items: CheckboxItem[];
-  idsToRender?: string[];
+  /**
+   * Check to show or hide indeterminate state
+   */
+  showInderminateState?: boolean;
+  idsList?: string[];
   indentLevel?: number;
+  /**
+   * Onclick handler
+   */
   onClick?: (id: string) => void;
-  getStateForId: (id: string) => CheckboxState;
+  /**
+   * Function to get state for particular id
+   */
+  getIdState: (id: string) => CheckboxState;
 };
 
 const CheckboxList: React.FC<CheckboxListProps> = ({
   items,
-  getStateForId,
-  idsToRender = [],
+  getIdState,
+  showInderminateState = true,
+  idsList = [],
   indentLevel = 0,
   onClick = () => {},
 }) => {
-  if (!idsToRender.length) {
-    idsToRender = items.filter((i) => !i.parentId).map((i) => i.id);
+  if (!idsList.length) {
+    idsList = items.filter((i) => !i.parentId).map((i) => i.id);
   }
 
   return (
@@ -47,20 +62,21 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
       })}
       style={{ paddingLeft: indentLevel === 0 ? indentLevel * 30 : 30 }}
     >
-      {idsToRender.map((id) => {
+      {idsList.map((id) => {
         const item = items.filter((i) => i.id === id)[0];
-        const checkboxState = getStateForId(id);
+        const checkboxState = getIdState(id);
         const nodeItems = items.filter((i) => i.parentId === item.id);
         return (
           <ListItem
             key={item.id}
             items={items}
             item={item}
+            showInderminateState={showInderminateState}
             nodeItems={nodeItems}
             onClick={onClick}
             checkboxState={checkboxState}
             indentLevel={indentLevel}
-            getStateForId={getStateForId}
+            getIdState={getIdState}
           />
         );
       })}
@@ -71,11 +87,12 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
 const ListItem = ({
   item,
   nodeItems,
+  showInderminateState,
   onClick = () => {},
   checkboxState,
   items,
   indentLevel = 0,
-  getStateForId,
+  getIdState,
 }: ListProps) => {
   const [expand, setExpand] = useState(true);
 
@@ -85,10 +102,11 @@ const ListItem = ({
     return (
       <CheckboxList
         items={items}
-        idsToRender={nodeItems.map((i) => i.id)}
+        showInderminateState={showInderminateState}
+        idsList={nodeItems.map((i) => i.id)}
         indentLevel={indentLevel + 1}
         onClick={onClick}
-        getStateForId={getStateForId}
+        getIdState={getIdState}
       />
     );
   };
@@ -106,7 +124,7 @@ const ListItem = ({
         <Checkbox
           onClick={() => onClick(item.id)}
           isChecked={checkboxState === CheckboxState.CHECKED}
-          isIndeterminate={checkboxState === CheckboxState.INDETERMINATE}
+          isIndeterminate={showInderminateState && checkboxState === CheckboxState.INDETERMINATE}
         />
         <span>{item?.name}</span>
       </li>

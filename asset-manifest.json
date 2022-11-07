@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/checkbox-list/static/css/main.03924a39.css",
-    "main.js": "/checkbox-list/static/js/main.ccc5a4be.js",
+    "main.js": "/checkbox-list/static/js/main.e4d9e442.js",
     "index.html": "/checkbox-list/index.html",
     "main.03924a39.css.map": "/checkbox-list/static/css/main.03924a39.css.map",
-    "main.ccc5a4be.js.map": "/checkbox-list/static/js/main.ccc5a4be.js.map"
+    "main.e4d9e442.js.map": "/checkbox-list/static/js/main.e4d9e442.js.map"
   },
   "entrypoints": [
     "static/css/main.03924a39.css",
-    "static/js/main.ccc5a4be.js"
+    "static/js/main.e4d9e442.js"
   ]
 }
